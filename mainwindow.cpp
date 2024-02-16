@@ -47,7 +47,7 @@ void MainWindow::buildCommand(std::string fileName,std::string flags)
 }
 void MainWindow::on_optimizeButton_clicked()
 {
-    auto fileName = ui->inputLine->text();
+    auto fileNames = ui->inputLine->text();
     //todo: separate filenames into separate commands
     /*
     if(std::filesystem::exists(fileName) == false)
@@ -57,10 +57,12 @@ void MainWindow::on_optimizeButton_clicked()
     }*/
     std::string flags{ui->comboBox->currentText().toStdString()};
 
-    auto names = qfilelib::separateFilenames(fileName);
+    auto fileNameList = qfilelib::separateFilenames(fileNames);
+    for(auto& fileName : fileNameList)
+    {
+        buildCommand(fileName.toStdString(),flags);
+    }
 
-
-    buildCommand(fileName.toStdString(),flags);
 }
 void MainWindow::updateQueueStatus(uint* status)
 {
