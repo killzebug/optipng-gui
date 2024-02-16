@@ -24,7 +24,7 @@ void MainWindow::buildCommand(std::string fileName,std::string flags)
 {
     std::string command{"optipng "};
     command += flags;
-    command += " ";
+    command += ' ';
 
     if(ui->newfileButton->isChecked())
     {
@@ -48,18 +48,18 @@ void MainWindow::buildCommand(std::string fileName,std::string flags)
 void MainWindow::on_optimizeButton_clicked()
 {
     auto fileNames = ui->inputLine->text();
-    //todo: separate filenames into separate commands
-    /*
-    if(std::filesystem::exists(fileName) == false)
+    if(fileNames == "")
     {
-        noImage.showMessage("No image provided.");
+        noImage.showMessage("Please provide an image.");
         return;
-    }*/
+    }
     std::string flags{ui->comboBox->currentText().toStdString()};
 
     auto fileNameList = qfilelib::separateFilenames(fileNames);
     for(auto& fileName : fileNameList)
     {
+        //todo: show a no image provided error. Need to do that through shell because stl filesystem stuff doesn't accept shell sanitized filenames
+        //noImage.showMessage("No image provided. Escape spaces and characters ; \ \" with a backslash if you entered the filename manually");
         buildCommand(fileName.toStdString(),flags);
     }
 
@@ -67,6 +67,13 @@ void MainWindow::on_optimizeButton_clicked()
 void MainWindow::updateQueueStatus(uint* status)
 {
     QString statusText = QString("%1/%2 complete.").arg(QString::number(status[0]),QString::number(status[1]));
+    uint& errorCount = status[2];
+    if(errorCount != 0)
+    {
+        QChar plurality{};
+        if(status[2] > 1) plurality = 's';
+        statusText += QString(" (%1 error%2)").arg(QString::number(errorCount),plurality);
+    }
     ui->statusBar->showMessage(statusText);
     //delete[] status;
 }
