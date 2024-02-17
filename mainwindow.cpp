@@ -22,7 +22,7 @@ MainWindow::~MainWindow()
 }
 void MainWindow::buildCommand(std::string fileName,std::string flags)
 {
-    std::string command{"optipng "};
+    std::string command{"optipng -fix "};
     command += flags;
     command += ' ';
 

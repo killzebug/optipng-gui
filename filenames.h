@@ -9,7 +9,7 @@ inline void escapeFilename(QString& fileName)
     for(int i = fileName.size() - 1; i >= 0; i--)
     {
         auto ch = fileName[i];
-        if(ch == ' ' || ch == '\\' || ch == '\"' || ch == ';' || ch == '(' || ch == ')')
+        if(ch == ' ' || ch == '\\' || ch == '\"' || ch == ';' || ch == '(' || ch == ')' || ch == '&' || ch == '{' || ch == '}')
         {
             fileName.insert(i,'\\');
         }

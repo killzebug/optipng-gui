@@ -76,7 +76,11 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <widget class="QLineEdit" name="outputLine"/>
+        <widget class="QLineEdit" name="outputLine">
+         <property name="maxLength">
+          <number>999999999</number>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QPushButton" name="outputBrowseButton">
@@ -114,7 +118,11 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QLineEdit" name="inputLine"/>
+        <widget class="QLineEdit" name="inputLine">
+         <property name="maxLength">
+          <number>999999999</number>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QPushButton" name="browseButton">
