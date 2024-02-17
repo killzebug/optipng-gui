@@ -71,9 +71,8 @@ void MainWindow::updateQueueStatus(uint* status)
     if(errorCount != 0)
     {
         QChar plurality{};
-        if(status[2] > 1) plurality = 's';
+        if(errorCount > 1) plurality = 's';
         statusText += QString(" (%1 error%2)").arg(QString::number(errorCount),plurality);
     }
     ui->statusBar->showMessage(statusText);
-    //delete[] status;
 }
