@@ -64,10 +64,10 @@ void MainWindow::on_optimizeButton_clicked()
     }
 
 }
-void MainWindow::updateQueueStatus(uint* status)
+void MainWindow::updateQueueStatus(optimizationStatus& status)
 {
-    QString statusText = QString("%1/%2 complete.").arg(QString::number(status[0]),QString::number(status[1]));
-    uint& errorCount = status[2];
+    QString statusText = QString("%1/%2 complete.").arg(QString::number(status.completedCount),QString::number(status.totalCount));
+    uint& errorCount = status.errorCount;
     if(errorCount != 0)
     {
         QChar plurality{};

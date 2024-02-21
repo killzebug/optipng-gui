@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QErrorMessage>
-
+#include "optimizationStatus.h"
 #include "optimizationqueue.h"
 
 QT_BEGIN_NAMESPACE
@@ -18,7 +18,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 public slots:
-    void updateQueueStatus(uint* status);
+    void updateQueueStatus(optimizationStatus& status);
     void buildCommand(std::string,std::string);
 private slots:
     void on_browseButton_clicked();

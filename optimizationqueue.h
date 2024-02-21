@@ -2,6 +2,7 @@
 #define OPTIMIZATIONQUEUE_H
 
 #include <QObject>
+#include "optimizationStatus.h"
 
 class OptimizationQueue : public QObject
 {
@@ -11,14 +12,12 @@ public:
     void queue(const char* command);
 
 signals:
-    void updateStatus(uint* status);
+    void updateStatus(optimizationStatus& status);
 private slots:
     void itemFinished(int status);
 private:
     void makeStatusUpdate();
-    uint totalCount{};
-    uint completedCount{};
-    uint errorCount{};
+    optimizationStatus status;
 };
 
 #endif // OPTIMIZATIONQUEUE_H

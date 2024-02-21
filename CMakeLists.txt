@@ -45,6 +45,8 @@ else()
             optimizer.h optimizer.cpp
             optimizationqueue.h optimizationqueue.cpp
             filenames.h
+            optimizationStatus.h
+
 
         )
     endif()

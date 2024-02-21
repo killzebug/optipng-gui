@@ -12,18 +12,17 @@ void OptimizationQueue::queue(const char *command)
     optimizer->setAutoDelete(true);
     optimizer->setCommand(command);
     connect(optimizer,&Optimizer::finished,this,&OptimizationQueue::itemFinished);
-    ++totalCount;
+    status.totalCount++;
     makeStatusUpdate();
     QThreadPool::globalInstance()->start(optimizer);
 }
-void OptimizationQueue::itemFinished(int status)
+void OptimizationQueue::itemFinished(int finishStatus)
 {
-    if(status != 0) ++errorCount;
-    ++completedCount;
+    if(finishStatus != 0) status.errorCount++;
+    status.completedCount++;
     makeStatusUpdate();
 }
 void OptimizationQueue::makeStatusUpdate()
 {
-    uint output[] = {completedCount,totalCount,errorCount};
-    emit updateStatus(output);
+    emit updateStatus(status);
 }
