@@ -1,20 +1,36 @@
 #ifndef QFIRE_BROWSE_H
 #define QFIRE_BROWSE_H
 #include <QFileDialog>
+#include <filesystem>
+
+#ifdef _WIN32
+#define DIRECTORYSTRUCTURESEPARATOR '\\'
+#include <Shlobj.h>
+#elif __linux__
+#define DIRECTORYSTRUCTURESEPARATOR '/'
 #include <pwd.h>
 #include <unistd.h>
-#include <filesystem>
+#else
+#error "[QFilelib] This platform is not supported yet."
+#endif
+
 namespace qfilelib {
 inline std::wstring getPathFolder(const std::wstring& path)
 {
     std::wstring folder;
-    auto folderPos = path.find_last_of('/');
+    auto folderPos = path.find_last_of(DIRECTORYSTRUCTURESEPARATOR);
     folder = path.substr(0,folderPos);
     return folder;
 }
 inline const char* getHomeDirectory()
 {
+#ifdef _WIN32
+    const char* userDirectoryPath[MAX_PATH+1];
+    SHGetKnownFolderPath(FOLDERID_Profile, 0, NULL, &userDirectoryPath);
+    return userDirectoryPath;
+#else
     return getpwuid(getuid())->pw_dir;
+#endif
 }
 inline QString lastFolder;
 //Checks if the last visited folder exists, sets it to the home directory if it does not
