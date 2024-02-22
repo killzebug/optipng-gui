@@ -6,10 +6,16 @@
 #include "browse.h"
 #include "filenames.h"
 using namespace qfilelib;
-//TODO: Add BMP, GIF, PNM and TIFF filetypes
 void MainWindow::on_browseButton_clicked()
 {
-    QStringList fileNames = browseMultiple(this,"Select image","PNG files (*.png)");
+    QStringList fileNames = browseMultiple(this,"Select image",
+        //Image format filters, non-png formats are converted to png.
+        "PNG images (*.png);;"
+        "Convertable image formats (*.png *.bmp  *.pnm *.tiff);;"
+        //"GIF files (*.gif);;" //would convert a gif file to a png needs -snip enabled needs testing
+        "BMP images (*.bmp);;"
+        "PNM images (*.pnm);;"
+        "TIFF images (*.tiff)");
     if(fileNames.isEmpty()) return;
     escapeFilenames(fileNames);
     QString text = fileNames.join(" ");
