@@ -10,3 +10,6 @@ An application that allows you to losslessly optimize the filesize of PNG images
 - libQT5Core/GUI/Widgets 
 ## Compiling
 Compile using QtCreator or CMake.
+```
+cmake CMakeLists.txt && make
+```
