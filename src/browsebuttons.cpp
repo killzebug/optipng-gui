@@ -3,8 +3,8 @@
 #include <QFileDialog>
 #include <pwd.h>
 #include <unistd.h>
-#include "browse.h"
-#include "filenames.h"
+#include "../libs/browse.h"
+#include "../libs/filenames.h"
 using namespace qfilelib;
 void MainWindow::on_browseButton_clicked()
 {

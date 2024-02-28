@@ -13,12 +13,10 @@ find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 #find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Concurrent)
 set(PROJECT_SOURCES
-        main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
-        optimizer.h
-        optimizer.cpp
+        src/main.cpp
+        src/mainwindow.cpp
+        src/mainwindow.h
+        src/mainwindow.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -40,14 +38,12 @@ else()
     else()
         add_executable(optipng-gui
             ${PROJECT_SOURCES}
-            browsebuttons.cpp
-            browse.h
-            optimizer.h optimizer.cpp
-            optimizationqueue.h optimizationqueue.cpp
-            filenames.h
-            optimizationStatus.h
-
-
+            src/browsebuttons.cpp
+            src/optimizer.h src/optimizer.cpp
+            src/optimizationqueue.h src/optimizationqueue.cpp
+            src/optimizationStatus.h
+            libs/filenames.h
+            libs/browse.h
         )
     endif()
 endif()

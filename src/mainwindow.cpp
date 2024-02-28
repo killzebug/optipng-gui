@@ -4,7 +4,7 @@
 #include <string>
 #include <filesystem>
 #include <QThread>
-#include "filenames.h"
+#include "../libs/filenames.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
